@@ -1,0 +1,50 @@
+version: "3.7"
+
+# Please refer to the official documentation:
+# https://docs.docker.com/compose/compose-file/
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  nginx:
+    image: nginx:1.22-alpine
+    ports:
+      - 8003:80
+    working_dir: /opt/www
+    volumes:
+      - ./deploy/conf.d:/etc/nginx/conf.d/:rw
+      - .:/opt/www
+    networks:
+      - default
+
+  php:
+    image: juchisha/php:8.0-alpine-swoole
+    working_dir: /opt/www
+    depends_on:
+      - mysql
+    volumes:
+      - .:/opt/www
+    entrypoint: [ "sh", "/opt/www/entrypoint.sh" ]
+    expose:
+      - 9501
+    ports:
+      - "5022:9502"
+    networks:
+      - default
+
+  mysql:
+    image: mysql:8.0.31
+    ports:
+      - "33063:3306"
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: "Linnzh@1996"
+      MYSQL_USER: "linnzh"
+      MYSQL_PASSWORD: "Linnzh@1996"
+      MYSQL_DATABASE: "hyperf-skeleton"
+    volumes:
+      - ./runtime/mysql:/var/lib/mysql
+    networks:
+      - default
