@@ -3,7 +3,7 @@
 # Entrypoint Script
 
 # Setup Project Dependencies
-composer install -o
+composer install -o -vvv
 
 # Execute database migrations
 php ./bin/hyperf.php migrate

@@ -20,7 +20,7 @@ services:
       - default
 
   php:
-    image: juchisha/php:8.0-alpine-swoole
+    build: .
     working_dir: /opt/www
     depends_on:
       - mysql
@@ -30,7 +30,7 @@ services:
     expose:
       - 9501
     ports:
-      - "5022:9502"
+      - "5022:9501"
     networks:
       - default
 
