@@ -46,7 +46,9 @@
             "App\\": "app/",
             "Linnzh\\": "extends/"
         },
-        "files": []
+        "files": [
+            "extends/Functions.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
