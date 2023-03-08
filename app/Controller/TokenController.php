@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Service\TokenService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\DeleteMapping;
 use Hyperf\HttpServer\Annotation\PostMapping;
 
 #[Controller]
@@ -31,6 +32,16 @@ class TokenController extends AbstractController
         $accessToken = $this->request->header('Authorization');
 
         $this->tokenService->refresh($accessToken);
+
+        return $this->response->json(['code' => 200]);
+    }
+
+    #[DeleteMapping(path: "/logout")]
+    public function logout()
+    {
+        $accessToken = $this->request->header('Authorization');
+
+        $this->tokenService->logout($accessToken);
 
         return $this->response->json(['code' => 200]);
     }

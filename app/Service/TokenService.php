@@ -43,4 +43,9 @@ class TokenService
     {
         $this->redis->setTimeout(self::USER_LOGIN_ACCESS_TOKEN_PREFIX . $accessToken, 43200);
     }
+
+    public function logout(?string $accessToken)
+    {
+        $this->redis->del(self::USER_LOGIN_ACCESS_TOKEN_PREFIX . $accessToken);
+    }
 }
