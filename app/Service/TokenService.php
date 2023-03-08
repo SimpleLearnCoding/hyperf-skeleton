@@ -38,4 +38,9 @@ class TokenService
             'username' => $username,
         ];
     }
+
+    public function refresh(?string $accessToken)
+    {
+        $this->redis->setTimeout(self::USER_LOGIN_ACCESS_TOKEN_PREFIX . $accessToken, 43200);
+    }
 }

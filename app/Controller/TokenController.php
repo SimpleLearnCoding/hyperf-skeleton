@@ -24,4 +24,14 @@ class TokenController extends AbstractController
 
         return $this->response->json(['code' => 200, 'data' => $result]);
     }
+
+    #[PostMapping(path: "/refresh")]
+    public function refresh()
+    {
+        $accessToken = $this->request->header('Authorization');
+
+        $this->tokenService->refresh($accessToken);
+
+        return $this->response->json(['code' => 200]);
+    }
 }
