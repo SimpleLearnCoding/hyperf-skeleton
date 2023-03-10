@@ -95,18 +95,20 @@ class AlgoTest extends TestCase
         }
 
         if (empty($tree['children'])) {
-            return;
+            return $path;
         }
 
         foreach ($tree['children'] as $k => $child) {
 
             $curPath = $path;
-            $this->findPath($child, $id, $curPath);
+            $curPath = $this->findPath($child, $id, $curPath);
 
             if (!empty($curPath) && end($curPath) == $id) {
                 $path = $curPath;
                 break;
             }
         }
+
+        return $path;
     }
 }
