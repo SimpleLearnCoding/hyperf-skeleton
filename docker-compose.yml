@@ -26,7 +26,7 @@ services:
       - mysql
     volumes:
       - .:/opt/www
-    entrypoint: [ "sh", "/opt/www/entrypoint.sh" ]
+    #entrypoint: [ "sh", "/opt/www/entrypoint.sh" ]
     expose:
       - 9501
     ports:
