@@ -17,7 +17,7 @@ class AlgoTest extends TestCase
     public function testExample()
     {
         // 这是一个tree，需要输入一个id，返回该节点回溯到根目录的路径，例如：输入（3），输出（[1,2,3]）。输入（7），输出（[6,7]）
-        $tree = json_decode('[{"id":1,"name":"颜色","children":[{"id":2,"name":"红色","children":[{"id":3,"name":"淡红色","children":[]},{"id":4,"name":"深红色","children":[]},{"id":5,"name":"洋红色","children":[]}]}]},{"id":6,"name":"尺寸","children":[{"id":7,"name":"小","children":[]},{"id":8,"name":"中","children":[]},{"id":9,"name":"大","children":[]}]}]', true);
+        $tree = json_decode('[{"id":1,"name":"颜色","children":[{"id":2,"name":"红色","children":[{"id":3,"name":"淡红色","children":[]},{"id":4,"name":"深红色","children":[]},{"id":5,"name":"洋红色","children":[]}]}]},{"id":6,"name":"尺寸","children":[{"id":7,"name":"小","children":[]},{"id":8,"name":"中","children":[]},{"id":9,"name":"大","children":[]}]},{"id":10,"name":"人群","children":[{"id":11,"name":"工人","children":[]},{"id":12,"name":"白领","children":[{"id":13,"name":"程序员","children":[{"id":14,"name":"测试","children":[]}]}]}]}]', true);
 
         if (!isset($tree['id'], $tree['children'])) {
             $tree = ['id' => null, 'children' => $tree];
@@ -25,7 +25,7 @@ class AlgoTest extends TestCase
 
         $path = $paths = [];
         $this->dfs($tree, $paths, $path);
-        $this->assertCount(6, $paths);
+        $this->assertCount(8, $paths);
 
         $this->assertEquals('1', implode(',', $this->main($tree, 1)));
         $this->assertEquals('1,2', implode(',', $this->main($tree, 2)));
@@ -36,6 +36,11 @@ class AlgoTest extends TestCase
         $this->assertEquals('6,7', implode(',', $this->main($tree, 7)));
         $this->assertEquals('6,8', implode(',', $this->main($tree, 8)));
         $this->assertEquals('6,9', implode(',', $this->main($tree, 9)));
+        $this->assertEquals('10', implode(',', $this->main($tree, 10)));
+        $this->assertEquals('10,11', implode(',', $this->main($tree, 11)));
+        $this->assertEquals('10,12', implode(',', $this->main($tree, 12)));
+        $this->assertEquals('10,12,13', implode(',', $this->main($tree, 13)));
+        $this->assertEquals('10,12,13,14', implode(',', $this->main($tree, 14)));
 
     }
 
