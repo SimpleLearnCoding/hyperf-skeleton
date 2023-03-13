@@ -36,7 +36,7 @@ function generateIv(int $length = 16)
 }
 
 /**
- * 假设石头剪刀布分别使用 0、1、2 指代
+ * 假设剪刀石头布分别使用 0、1、2 指代
  * 输入双方手势对应的值，计算输赢（-1，输；0，平局；1，胜利）
  *
  * @param int $left
@@ -47,8 +47,8 @@ function generateIv(int $length = 16)
 function mora(int $left, int $right)
 {
     return match (true) {
-        $left == $right => 0,
-        $right == (($left + 1) % 3) => -1,
+        ($left == $right) => 0,
+        ($right == (($left + 1) % 3)) => -1,
         default => 1,
     };
 }
