@@ -52,3 +52,26 @@ function mora(int $left, int $right)
         default => 1,
     };
 }
+
+/**
+ * 最大公约数：辗转相除法
+ *
+ * @param int $left
+ * @param int $right
+ *
+ * @return int|mixed
+ */
+function maxCommonDivisor(int $left, int $right)
+{
+    if ($left <= 0 || $right <= 0) {
+        return null;
+    }
+    while ($left != $right) {
+        if ($left > $right) {
+            $left -= $right;
+        } else {
+            $right -= $left;
+        }
+    }
+    return $right;
+}
