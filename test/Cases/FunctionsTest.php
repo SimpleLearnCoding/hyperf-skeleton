@@ -24,4 +24,11 @@ class FunctionsTest extends TestCase
         $this->assertEquals(-1, mora(1, 2));// 石头、布
         $this->assertEquals(1, mora(1, 0));// 石头、剪刀
     }
+
+    public function testMinCommonMultiple()
+    {
+        $this->assertEquals(84, minCommonMultiple(12, 42));
+        $this->assertEquals(84, minCommonMultiple(42, 12));
+        $this->assertEquals(516, minCommonMultiple(43, 12));
+    }
 }

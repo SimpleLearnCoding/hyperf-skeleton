@@ -1,5 +1,7 @@
 <?php
 
+use JetBrains\PhpStorm\Pure;
+
 function uuid(string $prefix = ''): string
 {
     $chars = md5(uniqid((string) mt_rand(), true));
@@ -74,4 +76,12 @@ function maxCommonDivisor(int $left, int $right)
         }
     }
     return $right;
+}
+
+#[Pure]
+function minCommonMultiple(int $left, int $right)
+{
+    $maxCommonDivisor = maxCommonDivisor($left, $right);
+
+    return $maxCommonDivisor ? $left * $right / $maxCommonDivisor : $maxCommonDivisor;
 }
