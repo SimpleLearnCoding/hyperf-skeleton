@@ -26,11 +26,29 @@ function uuid(string $prefix = ''): string
 function generateIv(int $length = 16)
 {
     if ($length <= 0) {
-        throw new \InvalidArgumentException('Invalid Argument');
+        throw new InvalidArgumentException('Invalid Argument');
     }
     do {
         $bytes = random_bytes($length);
     } while (!$bytes);
 
     return $bytes;
+}
+
+/**
+ * 假设石头剪刀布分别使用 0、1、2 指代
+ * 输入双方手势对应的值，计算输赢（-1，输；0，平局；1，胜利）
+ *
+ * @param int $left
+ * @param int $right
+ *
+ * @return int
+ */
+function mora(int $left, int $right)
+{
+    return match (true) {
+        $left == $right => 0,
+        $right == (($left + 1) % 3) => -1,
+        default => 1,
+    };
 }
